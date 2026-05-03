@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #4338ca;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 400px;
+      height: auto;
+    }
+
+    .form-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 16px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form-container input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background:#4338ca ;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .form-container input[type="submit"]:hover {
+      background: #4338ca;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-size: 20px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #bbb;
+      border-radius: 5px;
+      font-size:18px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h1>Register</h1>
+  <form action="#" method="post" name="submit-to-google-sheet">
+    <input type="text" name="fullname" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <label for="rating">student or faculty</label>
+    <select id="rating" name="student or faculty">
+      <option value="student">student</option>
+      <option value="faculty">faculty</option>
+    </select><br></br>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="submit" value="Register">
+  </form>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxv3ACkJnX77LTzoAAtUlldgM0w9nhAEHdm98gZ_jgwryleeGUlFkpFeg06tI5SMFCtmg/exec'
+    const form = document.forms['submit-to-google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+        // ✅ after successful submit → go to next page
+        window.location.href = "feedback.html";
+      })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+</div>
+
+</body>
+</html>
